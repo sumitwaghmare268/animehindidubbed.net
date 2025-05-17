@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnimeFlix - Stream Your Favorite Anime</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+    <style>
+        /* Custom styles */
+        .anime-card:hover .anime-title {
+            color: #f472b6;
+        }
+        .hero-bg {
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.5)), url('https://via.placeholder.com/1920x1080') center/cover;
+        }
+        .episode-thumbnail {
+            transition: transform 0.3s ease;
+        }
+        .episode-thumbnail:hover {
+            transform: scale(1.05);
+        }
+        .search-results {
+            display: none;
+        }
+        .search-input:focus + .search-results, .search-results:hover {
+            display: block;
+        }
+        .dark .dark\:bg-gray-900 {
+            background-color: #111827;
+        }
+        .dark .dark\:text-white {
+            color: #f3f4f6;
+        }
+        /* Animation for theme toggle */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .theme-transition {
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+    </style>
+</head>
+<body class="theme-transition bg-gray-100 dark:bg-gray-900 dark:text-white font-sans">
+    <!-- Navigation -->
+    <nav class="bg-pink-700 dark:bg-gray-800 shadow-lg fixed w-full z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="#" class="flex items-center">
+                        <i class="fas fa-dragon text-2xl text-white mr-2"></i>
+                        <span class="text-white font-bold text-xl">AnimeFlix</span>
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#" class="text-white hover:text-pink-200">Home</a>
+                    <a href="#" class="text-white hover:text-pink-200">Genres</a>
+                    <a href="#" class="text-white hover:text-pink-200">Trending</a>
+                    <a href="#" class="text-white hover:text-pink-200">My List</a>
+                </div>
+
+                <!-- Search and User -->
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <input type="text" placeholder="Search anime..." class="search-input bg-pink-800 dark:bg-gray-700 text-white px-4 py-1 rounded-full focus:outline-none focus:ring-2 focus:ring-pink-400 w-40 md:w-64 transition-all duration-300">
+                        <div class="search-results absolute top-10 left-0 w-64 bg-white dark:bg-gray-800 shadow-lg rounded-md mt-1 max-h-96 overflow-y-auto hidden z-50">
+                            <div class="p-2 border-b border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">Attack on Titan</div>
+                            <div class="p-2 border-b border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">Demon Slayer</div>
+                            <div class="p-2 border-b border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">Jujutsu Kaisen</div>
+                            <div class="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">One Piece</div>
+                        </div>
+                    </div>
+                    
+                    <button id="theme-toggle" class="text-white hover:text-pink-200 focus:outline-none">
+                        <i class="fas fa-moon text-xl"></i>
+                    </button>
+                    
+                    <button id="login-btn" class="bg-pink-600 hover:bg-pink-500 text-white px-4 py-1 rounded-full text-sm font-medium transition duration-300">Login</button>
+                    
+                    <!-- Mobile menu button -->
+                    <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-pink-700 dark:bg-gray-800 pb-4 px-4">
+            <a href="#" class="block text-white py-2 hover:text-pink-200">Home</a>
+            <a href="#" class="block text-white py-2 hover:text-pink-200">Genres</a>
+            <a href="#" class="block text-white py-2 hover:text-pink-200">Trending</a>
+            <a href="#" class="block text-white py-2 hover:text-pink-200">My List</a>
+        </div>
+    </nav>
+
+    <!-- Hero Banner -->
+    <section class="hero-bg h-96 md:h-screen/2 flex items-center pt-16">
+        <div class="container mx-auto px-4">
+            <div class="max-w-2xl">
+                <h1 class="text-4xl md:text-6xl font-bold text-white mb-4">Demon Slayer: Mugen Train</h1>
+                <p class="text-white text-lg mb-6">After his family was brutally murdered and his sister turned into a demon, Tanjiro Kamado's journey as a demon slayer began.</p>
+                <div class="flex space-x-4">
+                    <button class="bg-pink-600 hover:bg-pink-700 text-white px-6 py-2 rounded-full font-medium flex items-center">
+                        <i class="fas fa-play mr-2"></i> Watch Now
+                    </button>
+                    <button class="bg-gray-700 hover:bg-gray-600 bg-opacity-70 text-white px-6 py-2 rounded-full font-medium flex items-center">
+                        <i class="fas fa-plus mr-2"></i> My List
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Google Ad Banner -->
+    <div class="container mx-auto px-4 py-4">
+        <div class="bg-gray-200 dark:bg-gray-700 p-4 rounded-lg text-center">
+            <p class="text-gray-600 dark:text-gray-300 mb-2">Advertisement</p>
+            <!-- Google AdSense placeholder -->
+            <div class="w-full h-20 bg-gray-300 dark:bg-gray-600 flex items-center justify-center">
+                <p class="text-gray-500 dark:text-gray-400">ca-app-pub-1703718714013363/5695545732</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Trending Now Section -->
+        <section class="mb-12">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold">Trending Now</h2>
+                <a href="#" class="text-pink-600 dark:text-pink-400 hover:underline">View All</a>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                <!-- Anime Card 1 -->
+                <div class="anime-card">
+                    <div class="relative overflow-hidden rounded-lg shadow-lg">
+                        <img src="https://via.placeholder.com/300x450" alt="Attack on Titan" class="w-full h-48 md:h-64 object-cover">
+                        <div class="absolute top-2 right-2 bg-pink-600 text-white text-xs font-bold px-2 py-1 rounded-full">9.8</div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                            <button class="bg-pink-600 hover:bg-pink-700 text-white rounded-full p-2">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <h3 class="anime-title mt-2 font-medium text-gray-900 dark:text-white transition-colors duration-300">Attack on Titan</h3>
+                </div>
+                
+                <!-- Anime Card 2 -->
+                <div class="anime-card">
+                    <div class="relative overflow-hidden rounded-lg shadow-lg">
+                        <img src="https://via.placeholder.com/300x450" alt="Jujutsu Kaisen" class="w-full h-48 md:h-64 object-cover">
+                        <div class="absolute top-2 right-2 bg-pink-600 text-white text-xs font-bold px-2 py-1 rounded-full">9.5</div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                            <button class="bg-pink-600 hover:bg-pink-700 text-white rounded-full p-2">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <h3 class="anime-title mt-2 font-medium text-gray-900 dark:text-white transition-colors duration-300">Jujutsu Kaisen</h3>
+                </div>
+                
+                <!-- Anime Card 3 -->
+                <div class="anime-card">
+                    <div class="relative overflow-hidden rounded-lg shadow-lg">
+                        <img src="https://via.placeholder.com/300x450" alt="My Hero Academia" class="w-full h-48 md:h-64 object-cover">
+                        <div class="absolute top-2 right-2 bg-pink-600 text-white text-xs font-bold px-2 py-1 rounded-full">9.2</div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                            <button class="bg-pink-600 hover:bg-pink-700 text-white rounded-full p-2">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <h3 class="anime-title mt-2 font-medium text-gray-900 dark:text-white transition-colors duration-300">My Hero Academia</h3>
+                </div>
+                
+                <!-- Anime Card 4 -->
+                <div class="anime-card">
+                    <div class="relative overflow-hidden rounded-lg shadow-lg">
+                        <img src="https://via.placeholder.com/300x450" alt="Tokyo Revengers" class="w-full h-48 md:h-64 object-cover">
+                        <div class="absolute top-2 right-2 bg-pink-600 text-white text-xs font-bold px-2 py-1 rounded-full">8.9</div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                            <button class="bg-pink-600 hover:bg-pink-700 text-white rounded-full p-2">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <h3 class="anime-title mt-2 font-medium text-gray-900 dark:text-white transition-colors duration-300">Tokyo Revengers</h3>
+                </div>
+                
+                <!-- Anime Card 5 -->
+                <div class="anime-card">
+                    <div class="relative overflow-hidden rounded-lg shadow-lg">
+                        <img src="https://via.placeholder.com/300x450" alt="One Piece" class="w-full h-48 md:h-64 object-cover">
+                        <div class="absolute top-2 right-2 bg-pink-600 text-white text-xs font-bold px-2 py-1 rounded-full">9.7</div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                            <button class="bg-pink-600 hover:bg-pink-700 text-white rounded-full p-2">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <h3 class="anime-title mt-2 font-medium text-gray-900 dark:text-white transition-colors duration-300">One Piece</h3>
+                </div>
+                
+                <!-- Anime Card 6 -->
+                <div class="anime-card">
+                    <div class="relative overflow-hidden rounded-lg shadow-lg">
+                        <img src="https://via.placeholder.com/300x450" alt="Demon Slayer" class="w-full h-48 md:h-64 object-cover">
+                        <div class="absolute top-2 right-2 bg-pink-600 text-white text-xs font-bold px-2 py-1 rounded-full">9.9</div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                            <button class="bg-pink-600 hover:bg-pink-700 text-white rounded-full p-2">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <h3 class="anime-title mt-2 font-medium text-gray-900 dark:text-white transition-colors duration-300">Demon Slayer</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- New Releases Section -->
+        <section class="mb-12">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold">New Releases</h2>
+                <a href="#" class="text-pink-600 dark:text-pink-400 hover:underline">View All</a>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                <!-- Repeat similar anime cards for new releases -->
+                <div class="anime-card">
+                    <div class="relative overflow-hidden rounded-lg shadow-lg">
+                        <img src="https://via.placeholder.com/300x450" alt="Chainsaw Man" class="w-full h-48 md:h-64 object-cover">
+                        <div class="absolute top-2 right-2 bg-pink-600 text-white text-xs font-bold px-2 py-1 rounded-full">9.6</div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                            <button class="bg-pink-600 hover:bg-pink-700 text-white rounded-full p-2">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <h3 class="anime-title mt-2 font-medium text-gray-900 dark:text-white transition-colors duration-300">Chainsaw Man</h3>
+                </div>
+                
+                <!-- More new release cards... -->
+            </div>
+        </section>
+
+        <!-- Top Rated Section -->
+        <section class="mb-12">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold">Top Rated</h2>
+                <a href="#" class="text-pink-600 dark:text-pink-400 hover:underline">View All</a>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                <!-- Repeat similar anime cards for top rated -->
+                <div class="anime-card">
+                    <div class="relative overflow-hidden rounded-lg shadow-lg">
+                        <img src="https://via.placeholder.com/300x450" alt="Fullmetal Alchemist" class="w-full h-48 md:h-64 object-cover">
+                        <div class="absolute top-2 right-2 bg-pink-600 text-white text-xs font-bold px-2 py-1 rounded-full">9.9</div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                            <button class="bg-pink-600 hover:bg-pink-700 text-white rounded-full p-2">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <h3 class="anime-title mt-2 font-medium text-gray-900 dark:text-white transition-colors duration-300">Fullmetal Alchemist</h3>
+                </div>
+                
+                <!-- More top rated cards... -->
+            </div>
+        </section>
+
+        <!-- Google Ad Banner -->
+        <div class="bg-gray-200 dark:bg-gray-700 p-4 rounded-lg text-center mb-8">
+            <p class="text-gray-600 dark:text-gray-300 mb-2">Advertisement</p>
+            <!-- Google AdSense placeholder -->
+            <div class="w-full h-20 bg-gray-300 dark:bg-gray-600 flex items-center justify-center">
+                <p class="text-gray-500 dark:text-gray-400">ca-app-pub-1703718714013363/7455657453</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">AnimeFlix</h3>
+                    <p class="text-gray-400">The best place to stream your favorite anime shows and movies.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Navigation</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Genres</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Trending</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">My List</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Legal</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">DMCA</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Connect With Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
+                <p>&copy; 2023 AnimeFlix. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-md p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Login</h3>
+                <button id="close-login-modal" class="text-gray-500 dark:text-gray-400 hover:te
